@@ -1,0 +1,25 @@
+<aura:component controller="ContactController" implements="force:appHostable,flexipage:availableForAllPageTypes">
+	<aura:attribute name="mydata" type="Object"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="isModalShown" type="Boolean" default="false"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:registerEvent name="modalEvent" type="c:isModalShown"/>
+    <aura:registerEvent name="toastEvent" type="c:isTasksUpdatedFlagChanged"/>
+    <aura:handler name="modalEvent" event="c:isModalShown" action="{!c.handleComponentEvent}"/>
+    <aura:handler name="toastEvent" event="c:isTasksUpdatedFlagChanged" action="{!c.handleToastEvent}"/>
+    
+    <div>
+        <lightning:button label="Change status for all tasks" onclick="{!c.openModal}" class="slds-m-left_x-small"/>
+    </div>
+    
+    <div>
+    <lightning:datatable class="slds-table slds-table_cell-buffer slds-table_bordered" data="{! v.mydata }"
+        columns="{! v.mycolumns }"
+        keyField="Id"
+        hideCheckboxColumn="true"/>
+    </div>
+    
+    <aura:if isTrue="{!v.isModalShown}">
+       <c:TaskModalWindow/>
+    </aura:if>
+</aura:component>

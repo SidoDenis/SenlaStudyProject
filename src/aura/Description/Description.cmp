@@ -1,0 +1,18 @@
+<aura:component >
+	<aura:attribute name="description" type="String"/>
+    <aura:attribute name="descriptionLine" type="String"/>
+    <aura:attribute name="isDescriptionShown" type="Boolean" default="true"/>
+    
+    <form>
+        <lightning:input value="{!v.description}" label="Description"/>
+    </form>
+    
+    <p>
+        <aura:if isTrue="{!v.isDescriptionShown}">
+        {!v.descriptionLine}
+        </aura:if>
+    </p>
+    
+    <lightning:button label="Save description" onclick="{! c.saveDescription}"/>
+    <lightning:button label="Show/hide description" onclick="{! c.showHideDescription}"/>
+</aura:component>
