@@ -1,0 +1,24 @@
+/**
+ * Created by Sido_ on 13.10.2021.
+ */
+
+@IsTest
+private class LeadTriggerTask1HandlerTest {
+    @IsTest
+    static void testUpdatePhoneRecord() {
+        Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
+
+        Lead lead = new Lead();
+        lead.FirstName = 'test';
+        lead.LastName = 'test';
+        lead.Phone = '+375298897139';
+        lead.Company = 'Company';
+
+        Test.startTest();
+        Database.SaveResult result = Database.insert(lead);
+        Test.stopTest();
+
+        System.assert(result.isSuccess());
+        System.assert(result.getErrors().size() == 0);
+    }
+}
