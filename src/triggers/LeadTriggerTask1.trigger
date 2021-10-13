@@ -5,7 +5,7 @@
 trigger LeadTriggerTask1 on Lead (after insert) {
     if(Trigger.isAfter){
         if(Trigger.isInsert){
-            LeadTriggerTask1Handler.UpdatePhoneRecord(Trigger.newMap.keySet());
+            LeadTriggerTask1Handler.updatePhoneRecord(Trigger.newMap.keySet());
         }
     }
 }

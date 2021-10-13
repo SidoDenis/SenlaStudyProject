@@ -5,7 +5,7 @@
 trigger ContactTriggerTask1 on Contact (after insert) {
     if(Trigger.isAfter){
         if(Trigger.isInsert){
-            ContactTriggerTask1Handler.UpdatePhoneRecord(Trigger.newMap.keySet());
+            ContactTriggerTask1Handler.updatePhoneRecord(Trigger.newMap.keySet());
         }
     }
 }

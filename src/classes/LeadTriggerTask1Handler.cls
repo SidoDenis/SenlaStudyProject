@@ -4,27 +4,28 @@
 
 public with sharing class LeadTriggerTask1Handler {
 
+    private final static String ENDPOINT = 'https://restcountries.com/v2/callingcode/';
+    private final static String GET_METHOD = 'GET';
+    private final static String NAME = 'name';
+    private final static List<String> CODES = new List<String>{'+375', '+7', '+48'};
+
     @Future(Callout = true)
-    public static void UpdatePhoneRecord(Set<Id> leadIds){
-        List <Lead> leads = [SELECT Id, Name, Phone FROM Lead WHERE Id = :leadIds];
+    public static void updatePhoneRecord(Set<Id> leadIds){
+        List <Lead> leads = DatabaseQueries.getLeadsByIds(leadIds);
 
         for(Lead lead : leads) {
-            String phoneNumber = lead.Phone;
             String phoneCode = '';
-            if (phoneNumber.contains('+375')) {
-                phoneCode = '375';
-            } else if (phoneNumber.contains('+7')) {
-                phoneCode = '7';
-            } else if (phoneNumber.contains('+48')) {
-                phoneCode = '48';
-            } else {
-                return;
+            for(String code : CODES){
+                if(lead.Phone.contains(code)){
+                    phoneCode = code.substring(1);
+                    break;
+                }
             }
 
             Http http = new Http();
             HttpRequest httpRequest = new HttpRequest();
-            httpRequest.setEndpoint('https://restcountries.com/v2/callingcode/' + phoneCode);
-            httpRequest.setMethod('GET');
+            httpRequest.setEndpoint(ENDPOINT + phoneCode);
+            httpRequest.setMethod(GET_METHOD);
             HttpResponse response = http.send(httpRequest);
 
             if(response.getStatusCode() == 200) {
@@ -32,7 +33,7 @@ public with sharing class LeadTriggerTask1Handler {
                 JSONParser parser = JSON.createParser(response.getBody());
                 while (parser.nextToken() != null) {
                     if ((parser.getCurrentToken() == JSONToken.FIELD_NAME) &&
-                            (parser.getText() == 'name')) {
+                            (parser.getText() == NAME)) {
                         parser.nextToken();
                         countryFromPhone = parser.getText();
                         break;
