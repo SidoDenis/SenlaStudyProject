@@ -20,5 +20,6 @@ private class ContactTriggerTask1HandlerTest {
 
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
+        System.assertEquals('Belarus', [SELECT Id,Country_from_phone__c FROM Contact WHERE FirstName = 'test'].Country_from_phone__c);
     }
 }

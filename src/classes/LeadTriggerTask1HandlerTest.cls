@@ -20,5 +20,6 @@ private class LeadTriggerTask1HandlerTest {
 
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
+        System.assertEquals('Belarus', [SELECT Id,Country_from_phone__c FROM Lead WHERE FirstName = 'test'].Country_from_phone__c);
     }
 }
