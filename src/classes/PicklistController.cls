@@ -26,7 +26,9 @@ public with sharing class PicklistController {
     @AuraEnabled
     public static void launchSequence(String companyName, String companyEmail,String companyPhone,String accountType,
             String contactFirstName,String contactLastName,String contactEmail,String contactMobilePhone,
-            String shippingName,Integer cargoWeight, String cargoType, String fromCity, String toCity, Date dateValue){
+            String shippingName,Integer cargoWeight, String cargoType, String fromCity, String toCity, String dateValue){
+
+        Date dateParsed = Date.parse(dateValue);
 
         List<Contact> contacts = DatabaseQueries.getContactsByPhoneOrEmail(contactMobilePhone ,contactEmail);
         if(!contacts.isEmpty()){

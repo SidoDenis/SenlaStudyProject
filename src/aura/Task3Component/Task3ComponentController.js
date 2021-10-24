@@ -11,8 +11,8 @@
     createRequest: function (component, event, helper){
         let allValid = helper.checkValidity(component);
         if(allValid){
-            helper.clearFields(component);
             helper.launchCreateRequest(component);
+            helper.clearFields(component);
         }
     },
 });

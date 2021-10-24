@@ -2,7 +2,7 @@
  - Created by Sido_ on 17.10.2021.
  -->
 
-<aura:component implements="lightning:availableForFlowScreens" controller="PicklistController">
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="PicklistController">
     <aura:attribute name="CompanyName" type="String" default="CompanyName"/>
     <aura:attribute name="CompanyEmail" type="String" default="sido_denis@list.ru"/>
     <aura:attribute name="CompanyPhone" type="String" default="+375298897139"/>
@@ -18,7 +18,7 @@
     <aura:attribute name="CargoTypeOption" type="String" default="Food"/>
     <aura:attribute name="FromCityOption" type="String" default="Minsk"/>
     <aura:attribute name="ToCityOption" type="String" default="Minsk"/>
-    <aura:attribute name="DateValue" type="Date"/>
+    <aura:attribute name="DateValue" type="String" default="12/27/2015"/>
 
     <aura:attribute name="Comments" type="String"/>
 
@@ -102,7 +102,7 @@
             </lightning:select>
         </lightning:layoutItem>
         <lightning:layoutItem size="4" padding="around-small">
-            <lightning:input aura:id="dateShipping" type="date" value="{!v.DateValue}" name="Date" required="true" label="Date"/>
+            <lightning:input aura:id="dateShipping" value="{!v.DateValue}" name="Date" required="true" label="Date"/>
         </lightning:layoutItem>
     </lightning:layout>
 

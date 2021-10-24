@@ -1,0 +1,24 @@
+<!--
+ - Created by Sido_ on 24.10.2021.
+ -->
+
+<design:component label="Create a Request">
+    <design:attribute name="CompanyName" label="Company Name"/>
+    <design:attribute name="CompanyEmail" label="Company Email"/>
+    <design:attribute name="CompanyPhone" label="Company Phone"/>
+    <design:attribute name="AccountTypeOption" label="Account Type"/>
+
+    <design:attribute name="ContactFirstName" label="First Name"/>
+    <design:attribute name="ContactLastName" label="Last Name"/>
+    <design:attribute name="ContactEmail" label="Email"/>
+    <design:attribute name="ContactMobilePhone" label="Mobile Phone"/>
+
+    <design:attribute name="ShippingName" label="Shipping Name"/>
+    <design:attribute name="CargoWeight" label="Cargo Weight"/>
+    <design:attribute name="CargoTypeOption" label="Cargo Type"/>
+    <design:attribute name="FromCityOption" label="(From)City"/>
+    <design:attribute name="ToCityOption" label="(To)City"/>
+    <design:attribute name="DateValue" label="Date"/>
+
+    <design:attribute name="Comments" label="Comments"/>
+</design:component>
