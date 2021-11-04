@@ -1,111 +1,47 @@
-<!--
- - Created by Sido_ on 17.10.2021.
- -->
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="AuraComponentController">
+    <aura:attribute name="CompanyName" type="String" default="name"/>
+    <aura:attribute name="CompanyEmail" type="String" default="sido_denis@mail.ru"/>
+    <aura:attribute name="CompanyPhone" type="String" default="name"/>
+    <aura:attribute name="AccountTypeOption" type="String" default="Legal Entity"/>
 
-<aura:component implements="forceCommunity:availableForAllPageTypes" controller="PicklistController">
-    <aura:attribute name="CompanyName" type="String" default="CompanyName"/>
-    <aura:attribute name="CompanyEmail" type="String" default="sido_denis@list.ru"/>
-    <aura:attribute name="CompanyPhone" type="String" default="+375298897139"/>
-    <aura:attribute name="AccountTypeOption" type="String" default="Legal entity"/>
-
-    <aura:attribute name="ContactFirstName" type="String" default="ContactFirstName"/>
-    <aura:attribute name="ContactLastName" type="String" default="ContactLastName"/>
+    <aura:attribute name="ContactFirstName" type="String" default="name"/>
+    <aura:attribute name="ContactLastName" type="String" default="name"/>
     <aura:attribute name="ContactEmail" type="String" default="sido_denis@mail.ru"/>
-    <aura:attribute name="ContactMobilePhone" type="String" default="+375291234569"/>
+    <aura:attribute name="ContactMobilePhone" type="String" default="phone"/>
 
-    <aura:attribute name="ShippingName" type="String" default="ShippingName"/>
-    <aura:attribute name="CargoWeight" type="Integer" default="123"/>
+    <aura:attribute name="ShippingName" type="String" default="name"/>
+    <aura:attribute name="CargoWeight" type="Integer" default="100"/>
     <aura:attribute name="CargoTypeOption" type="String" default="Food"/>
     <aura:attribute name="FromCityOption" type="String" default="Minsk"/>
     <aura:attribute name="ToCityOption" type="String" default="Minsk"/>
-    <aura:attribute name="DateValue" type="String" default="12/27/2015"/>
+    <aura:attribute name="DateValue" type="String" default="12/27/2012"/>
 
     <aura:attribute name="Comments" type="String"/>
 
-    <aura:attribute name="CargoTypePicklist" type="String[]"/>
-    <aura:attribute name="CitiesPicklist" type="String[]"/>
-    <aura:attribute name="AccountTypePicklist" type="String[]"/>
-    <aura:attribute name="AccountObjectName" type="String" default="Account" access="global"/>
-    <aura:attribute name="TypeFieldName" type="String" default="Type" access="global"/>
-    <aura:attribute name="GlobalPicklistObjectName" type="String" default="GlobalPicklist__c" access="global"/>
-    <aura:attribute name="CargoTypeFieldName" type="String" default="Cargotype__c" access="global"/>
-    <aura:attribute name="CitiesFieldName" type="String" default="Cities__c" access="global"/>
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="CompanyValid" type="Boolean" default="false"/>
+    <aura:attribute name="ContactValid" type="Boolean" default="false"/>
+    <aura:attribute name="OtherValid" type="Boolean" default="false"/>
 
+    <aura:registerEvent name="companyInformationEvent" type="c:CompanyInformationChanged"/>
+    <aura:handler name="companyInformationEvent" event="c:CompanyInformationChanged"
+                  action="{!c.handleCompanyInfoEvent}"/>
+    <aura:registerEvent name="contactInformationEvent" type="c:ContactInformationChanged"/>
+    <aura:handler name="contactInformationEvent" event="c:ContactInformationChanged"
+                  action="{!c.handleContactInfoEvent}"/>
+    <aura:registerEvent name="otherInformationEvent" type="c:OtherInformationChanged"/>
+    <aura:handler name="otherInformationEvent" event="c:OtherInformationChanged" action="{!c.handleOtherInfoEvent}"/>
 
     <div><h2>Company Information</h2></div>
-    <hr class="solid"/>
-    <lightning:layout multipleRows="true">
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:input aura:id="companyName" class="class" value="{!v.CompanyName}" name="CompanyName" required="true" label="Name"/>
-        </lightning:layoutItem>
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:input aura:id="companyEmail" type="email" value="{!v.CompanyEmail}" name="CompanyEmail"  required="true" label="Email"/>
-        </lightning:layoutItem>
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:input aura:id="companyPhone" value="{!v.CompanyPhone}" name="CompanyPhone" required="true" label="Phone"/>
-        </lightning:layoutItem>
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:select aura:id="accountType" value="{!v.AccountTypeOption}" name="CompanyType" label="Type" required="true">
-                <aura:iteration items="{!v.AccountTypePicklist}" var="AccountType">
-                    <option text="{!AccountType}"></option>
-                </aura:iteration>
-            </lightning:select>
-        </lightning:layoutItem>
-    </lightning:layout>
+    <c:CompanyInformationComponent aura:id="companyInformationComponent"/>
 
+    <hr class="solid"/>
     <div><h2>Contact Company Information</h2></div>
-    <hr class="solid"/>
-    <lightning:layout multipleRows="true">
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:input aura:id="contactFirstName" value="{!v.ContactFirstName}" name="ContactFirstName" required="true" label="First Name"/>
-        </lightning:layoutItem>
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:input aura:id="contactLastName" value="{!v.ContactLastName}" name="ContactLastName" required="true" label="Last Name"/>
-        </lightning:layoutItem>
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:input aura:id="contactEmail" type="email" value="{!v.ContactEmail}" name="ContactEmail" required="true" label="Email"/>
-        </lightning:layoutItem>
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:input aura:id="contactMobilePhone" value="{!v.ContactMobilePhone}" name="ContactMobilePhone" required="true" label="Mobile Phone"/>
-        </lightning:layoutItem>
-    </lightning:layout>
+    <c:ContactInformationComponent aura:id="contactInformationComponent"/>
 
+    <hr class="solid"/>
     <div><h2>Other Information</h2></div>
-    <hr class="solid"/>
-    <lightning:layout multipleRows="true">
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:input aura:id="shippingName" value="{!v.ShippingName}" name="ShippingName"  required="true" label="Shipping Name"/>
-        </lightning:layoutItem>
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:input aura:id="cargoWeight" type="number" value="{!v.CargoWeight}" name="CargoWeight" required="true" label="Cargo Weight"/>
-        </lightning:layoutItem>
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:select aura:id="cargoType" value="{!v.CargoTypeOption}" name="CargoType" label="Cargo Type" required="true">
-                <aura:iteration items="{!v.CargoTypePicklist}" var="CargoType">
-                    <option text="{!CargoType}"></option>
-                </aura:iteration>
-            </lightning:select>
-        </lightning:layoutItem>
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:select aura:id="fromCityPicklist" value="{!v.FromCityOption}" name="FromCity" label="From(City)" required="true">
-                <aura:iteration items="{!v.CitiesPicklist}" var="City">
-                    <option text="{!City}"></option>
-                </aura:iteration>
-            </lightning:select>
-        </lightning:layoutItem>
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:select aura:id="toCityPicklist" value="{!v.ToCityOption}" name="ToCity" label="To(City)" required="true">
-                <aura:iteration items="{!v.CitiesPicklist}" var="City">
-                    <option text="{!City}"></option>
-                </aura:iteration>
-            </lightning:select>
-        </lightning:layoutItem>
-        <lightning:layoutItem size="4" padding="around-small">
-            <lightning:input aura:id="dateShipping" value="{!v.DateValue}" name="Date" required="true" label="Date"/>
-        </lightning:layoutItem>
-    </lightning:layout>
+    <c:OtherInformationComponent aura:id="otherInformationComponent"/>
 
-    <lightning:textarea value="{!v.Comments}" name="CommentArea" label="Comments" />
+    <lightning:textarea value="{!v.Comments}" name="CommentArea" label="Comments"/>
     <lightning:button variant="brand" type="submit" label="Create a Request" onclick="{!c.createRequest}"/>
 </aura:component>

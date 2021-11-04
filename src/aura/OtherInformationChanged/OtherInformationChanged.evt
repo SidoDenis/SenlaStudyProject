@@ -1,0 +1,9 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="ShippingName" type="String"/>
+    <aura:attribute name="CargoWeight" type="Integer"/>
+    <aura:attribute name="CargoTypeOption" type="String"/>
+    <aura:attribute name="FromCityOption" type="String"/>
+    <aura:attribute name="ToCityOption" type="String"/>
+    <aura:attribute name="DateValue" type="String"/>
+    <aura:attribute name="FormValid" type="Boolean" default="false"/>
+</aura:event>

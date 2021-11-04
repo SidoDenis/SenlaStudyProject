@@ -1,7 +1,3 @@
-<!--
- - Created by Sido_ on 24.10.2021.
- -->
-
 <design:component label="Create a Request">
     <design:attribute name="CompanyName" label="Company Name"/>
     <design:attribute name="CompanyEmail" label="Company Email"/>
