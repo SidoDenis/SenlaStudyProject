@@ -1,7 +1,3 @@
-/**
- * Created by Sido_ on 13.10.2021.
- */
-
 @IsTest
 global class MockHttpResponseGenerator implements HttpCalloutMock {
 
