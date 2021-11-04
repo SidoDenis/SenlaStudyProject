@@ -1,13 +1,28 @@
-public class LeadManager {
-    public static List<Lead> getLeads(List<String> fieldApiNames, Set<Id> leadIds){
-        String query = 'Select ' + String.join(fieldApiNames, ',') + ' From Lead Where id in:leadIds';
-        List<sObject> sobjList = Database.query(query);
-        return sobjList;
+public with sharing class LeadManager {
+
+    public static List<Lead> getLeadsByIds(Set<Id> leadIds) {
+        return [
+                SELECT Id, Name, Phone
+                FROM Lead
+                WHERE Id IN :leadIds
+        ];
     }
-    
-    public void create(){
-        Lead lead = new Lead(LastName = 'lastname', Company = 'company');
-        insert lead;
-        System.debug('00Q5g000005zSZGEA2');
+
+    public static List<Lead> getLeadsByPhoneOrEmail(String contactMobilePhone, String contactEmail) {
+        return [
+                SELECT Id, Email, Phone, FirstName, LastName
+                FROM Lead
+                WHERE Phone = :contactMobilePhone
+                OR Email = :contactEmail
+        ];
+    }
+
+    public static LeadStatus getLeadStatus() {
+        return [
+                SELECT Id, MasterLabel
+                FROM LeadStatus
+                WHERE IsConverted = TRUE
+                LIMIT 1
+        ];
     }
 }
