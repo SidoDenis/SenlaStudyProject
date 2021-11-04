@@ -1,0 +1,32 @@
+<aura:component controller="PicklistController">
+    <aura:attribute name="AccountTypePicklist" type="String[]"/>
+    <aura:attribute name="AccountObjectName" type="String" default="Account" access="global"/>
+    <aura:attribute name="TypeFieldName" type="String" default="Type" access="global"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="companyInformationEvent" type="c:CompanyInformationChanged"/>
+    <aura:method name="ClearCompanyFields" action="{!c.clearCompanyFields}"/>
+
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:input aura:id="companyName" class="class" onchange="{!c.handleChange}"
+                             name="CompanyName" required="true" label="Name" value="name"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:input aura:id="companyEmail" type="email" onchange="{!c.handleChange}"
+                             name="CompanyEmail" required="true" label="Email" value="sido_denis@mail.ru"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:input aura:id="companyPhone" name="CompanyPhone" onchange="{!c.handleChange}"
+                             required="true" label="Phone" value="phone"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:select aura:id="accountType" onchange="{!c.handleChange}"
+                              name="CompanyType" label="Type" required="true" value="Legal Entity">
+                <aura:iteration items="{!v.AccountTypePicklist}" var="AccountType">
+                    <option text="{!AccountType}"></option>
+                </aura:iteration>
+            </lightning:select>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

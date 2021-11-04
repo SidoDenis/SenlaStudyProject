@@ -1,0 +1,49 @@
+<aura:component controller="PicklistController">
+    <aura:attribute name="CargoTypePicklist" type="String[]"/>
+    <aura:attribute name="CitiesPicklist" type="String[]"/>
+    <aura:attribute name="GlobalPicklistObjectName" type="String" default="GlobalPicklist__c" access="global"/>
+    <aura:attribute name="CargoTypeFieldName" type="String" default="Cargotype__c" access="global"/>
+    <aura:attribute name="CitiesFieldName" type="String" default="Cities__c" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="otherInformationEvent" type="c:OtherInformationChanged"/>
+    <aura:method name="ClearOtherFields" action="{!c.clearOtherFields}"/>
+
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:input aura:id="shippingName" value="name" name="ShippingName"
+                             required="true" label="Shipping Name" onchange="{!c.handleChange}"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:input aura:id="cargoWeight" type="number" value="100" name="CargoWeight"
+                             required="true" label="Cargo Weight" onchange="{!c.handleChange}"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:select aura:id="cargoType" value="Food" name="CargoType"
+                              label="Cargo Type" required="true" onchange="{!c.handleChange}">
+                <aura:iteration items="{!v.CargoTypePicklist}" var="CargoType">
+                    <option text="{!CargoType}"></option>
+                </aura:iteration>
+            </lightning:select>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:select aura:id="fromCityPicklist" value="Minsk" name="FromCity"
+                              label="From(City)" required="true" onchange="{!c.handleChange}">
+                <aura:iteration items="{!v.CitiesPicklist}" var="City">
+                    <option text="{!City}"></option>
+                </aura:iteration>
+            </lightning:select>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:select aura:id="toCityPicklist" value="Minsk" name="ToCity"
+                              label="To(City)" required="true" onchange="{!c.handleChange}">
+                <aura:iteration items="{!v.CitiesPicklist}" var="City">
+                    <option text="{!City}"></option>
+                </aura:iteration>
+            </lightning:select>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:input aura:id="dateShipping" value="12/27/2012" name="Date"
+                             required="true" label="Date" onchange="{!c.handleChange}"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

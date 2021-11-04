@@ -1,0 +1,7 @@
+<aura:event type="COMPONENT" description="companyInformationChanged">
+    <aura:attribute name="CompanyName" type="String"/>
+    <aura:attribute name="CompanyEmail" type="String"/>
+    <aura:attribute name="CompanyPhone" type="String"/>
+    <aura:attribute name="AccountTypeOption" type="String"/>
+    <aura:attribute name="FormValid" type="Boolean" default="false"/>
+</aura:event>
