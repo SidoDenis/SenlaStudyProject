@@ -1,17 +1,13 @@
-/**
- * Created by Sido_ on 15.10.2021.
- */
-
 @IsTest
 private class SendOutdatedTasksNotificationTest {
 
     @TestSetup
-    static void setup(){
+    static void setup() {
         List<Task> tasks = new List<Task>();
         Id recordTypeId = Schema.SObjectType.Task.getRecordTypeInfosByDeveloperName()
                 .get('Offers_Call').getRecordTypeId();
 
-        for (Integer i=0;i<10;i++) {
+        for (Integer i = 0; i < 10; i++) {
             Task task = new Task();
             task.RecordTypeId = recordTypeId;
             task.OwnerId = '0055g0000097xI2AAI';
