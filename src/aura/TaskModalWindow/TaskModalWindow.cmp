@@ -1,4 +1,4 @@
-<aura:component controller="PicklistController">
+<aura:component controller="AuraComponentController">
     <aura:attribute name="StatusPicklist" type="String[]"/>
     <aura:attribute name="ObjectName" type="String" default="Task" access="global"/>
     <aura:attribute name="FieldName" type="String" default="Status" access="global"/>

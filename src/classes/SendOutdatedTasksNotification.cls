@@ -1,7 +1,13 @@
 global class SendOutdatedTasksNotification implements Database.Batchable<SObject>, Schedulable {
 
+    private String query;
+
+    global SendOutdatedTasksNotification(String query) {
+        this.query = query;
+    }
+
     global Database.QueryLocator start(Database.BatchableContext bc) {
-        return Database.getQueryLocator(ConstantsClass.QUERY);
+        return Database.getQueryLocator(query);
     }
 
     global void execute(Database.BatchableContext bc, List<Task> tasks) {
@@ -24,6 +30,6 @@ global class SendOutdatedTasksNotification implements Database.Batchable<SObject
     }
 
     global void execute(SchedulableContext sc) {
-        Database.executeBatch(new SendOutdatedTasksNotification());
+        Database.executeBatch(new SendOutdatedTasksNotification(ConstantsClass.QUERY));
     }
 }

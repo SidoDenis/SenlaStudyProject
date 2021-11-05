@@ -1,4 +1,4 @@
-public with sharing class PicklistController {
+public class PicklistController {
 
     @AuraEnabled(Cacheable = true)
     public static List<String> getPicklistValues(String objectName, String field_apiName) {

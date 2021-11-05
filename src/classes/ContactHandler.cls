@@ -16,7 +16,8 @@ public with sharing class ContactHandler {
 
             String countryFromPhone = APIIIntegration.getPhoneCountry(phoneCode);
             contact.Country_from_phone__c = countryFromPhone;
-            update contact;
+
         }
+        update contacts;
     }
 }
