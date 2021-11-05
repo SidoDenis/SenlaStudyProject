@@ -1,0 +1,47 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="AuraComponentController">
+    <aura:attribute name="CompanyName" type="String" default="name"/>
+    <aura:attribute name="CompanyEmail" type="String" default="sido_denis@mail.ru"/>
+    <aura:attribute name="CompanyPhone" type="String" default="name"/>
+    <aura:attribute name="AccountTypeOption" type="String" default="Legal Entity"/>
+
+    <aura:attribute name="ContactFirstName" type="String" default="name"/>
+    <aura:attribute name="ContactLastName" type="String" default="name"/>
+    <aura:attribute name="ContactEmail" type="String" default="sido_denis@mail.ru"/>
+    <aura:attribute name="ContactMobilePhone" type="String" default="phone"/>
+
+    <aura:attribute name="ShippingName" type="String" default="name"/>
+    <aura:attribute name="CargoWeight" type="Integer" default="100"/>
+    <aura:attribute name="CargoTypeOption" type="String" default="Food"/>
+    <aura:attribute name="FromCityOption" type="String" default="Minsk"/>
+    <aura:attribute name="ToCityOption" type="String" default="Minsk"/>
+    <aura:attribute name="DateValue" type="String" default="12/27/2012"/>
+
+    <aura:attribute name="Comments" type="String"/>
+
+    <aura:attribute name="CompanyValid" type="Boolean" default="false"/>
+    <aura:attribute name="ContactValid" type="Boolean" default="false"/>
+    <aura:attribute name="OtherValid" type="Boolean" default="false"/>
+
+    <aura:registerEvent name="companyInformationEvent" type="c:CompanyInformationChanged"/>
+    <aura:handler name="companyInformationEvent" event="c:CompanyInformationChanged"
+                  action="{!c.handleCompanyInfoEvent}"/>
+    <aura:registerEvent name="contactInformationEvent" type="c:ContactInformationChanged"/>
+    <aura:handler name="contactInformationEvent" event="c:ContactInformationChanged"
+                  action="{!c.handleContactInfoEvent}"/>
+    <aura:registerEvent name="otherInformationEvent" type="c:OtherInformationChanged"/>
+    <aura:handler name="otherInformationEvent" event="c:OtherInformationChanged" action="{!c.handleOtherInfoEvent}"/>
+
+    <div><h2>Company Information</h2></div>
+    <c:CompanyInformationComponent aura:id="companyInformationComponent"/>
+
+    <hr class="solid"/>
+    <div><h2>Contact Company Information</h2></div>
+    <c:ContactInformationComponent aura:id="contactInformationComponent"/>
+
+    <hr class="solid"/>
+    <div><h2>Other Information</h2></div>
+    <c:OtherInformationComponent aura:id="otherInformationComponent"/>
+
+    <lightning:textarea value="{!v.Comments}" name="CommentArea" label="Comments"/>
+    <lightning:button variant="brand" type="submit" label="Create a Request" onclick="{!c.createRequest}"/>
+</aura:component>
