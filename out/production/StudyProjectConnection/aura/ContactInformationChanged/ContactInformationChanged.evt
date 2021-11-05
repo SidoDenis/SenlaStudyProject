@@ -1,0 +1,6 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="ContactFirstName" type="String"/>
+    <aura:attribute name="ContactLastName" type="String" />
+    <aura:attribute name="ContactEmail" type="String"/>
+    <aura:attribute name="ContactMobilePhone" type="String"/>
+</aura:event>

@@ -1,0 +1,22 @@
+<aura:component controller="PicklistController">
+    <aura:registerEvent name="contactInformationEvent" type="c:ContactInformationChanged"/>
+
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:input aura:id="contactFirstName" value="name" name="ContactFirstName"
+                             required="true" label="First Name" onchange="{!c.handleChange}"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:input aura:id="contactLastName" value="name" name="ContactLastName"
+                             required="true" label="Last Name" onchange="{!c.handleChange}"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:input aura:id="contactEmail" type="email" value="sido_denis@mail.ru" name="ContactEmail"
+                             required="true" label="Email" onchange="{!c.handleChange}"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="4" padding="around-small">
+            <lightning:input aura:id="contactMobilePhone" value="phone" name="ContactMobilePhone"
+                             required="true" label="Mobile Phone" onchange="{!c.handleChange}"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>
