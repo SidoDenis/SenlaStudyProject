@@ -1,0 +1,30 @@
+<aura:component controller="ModalWindowController"
+                implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:attribute name="myData" type="Object"/>
+    <aura:attribute name="myColumns" type="List"/>
+    <aura:attribute name="selectedRow" type="Offer__c"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01"
+             aria-modal="true" aria-describedby="modal-content-id-1"
+             class="slds-modal slds-fade-in-open slds-modal_medium">
+        <div class="slds-modal__container">
+            <div style="font-size: 150%">Choose Offer</div>
+            <div class="slds-modal__content slds-p-around_none" id="modal-content-id-1">
+                <lightning:datatable class="slds-table slds-table_cell-buffer slds-table_bordered" data="{! v.myData }"
+                                     columns="{! v.myColumns }"
+                                     keyField="Id"
+                                     maxRowSelection="1"
+                                     minRowSelection="1"
+                                     onrowselection="{! c.changeSelectedRow}"
+                                     columnWidthsMode="fixed"/>
+            </div>
+
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick="{!c.closeModal}">Cancel</button>
+                <button class="slds-button slds-button_brand" onclick="{!c.createNewContract}">Save</button>
+            </footer>
+        </div>
+    </section>
+</aura:component>
